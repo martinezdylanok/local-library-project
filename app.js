@@ -6,6 +6,7 @@ import logger from "morgan";
 import createError from "http-errors";
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
+import catalogRouter from "./routes/catalog.js";
 import mongoDB from "./config/database.js";
 import mongoose from "mongoose";
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/catalog", catalogRouter);
 app.use(function (req, res, next) {
    next(createError(404));
 });
