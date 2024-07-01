@@ -20,6 +20,10 @@ BookInstanceSchema.virtual("url").get(function () {
    return `/catalog/bookinstance/${this._id}`;
 });
 
+BookInstanceSchema.virtual("due_back_formatted").get(function () {
+   return this.due_back.toDateString();
+});
+
 const BookInstance = mongoose.model("BookInstance", BookInstanceSchema);
 
 export default BookInstance;
