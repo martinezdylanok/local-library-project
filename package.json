@@ -16,6 +16,7 @@
     "express": "~4.19.2",
     "express-async-handler": "^1.2.0",
     "express-ejs-layouts": "^2.5.1",
+    "express-validator": "^7.1.0",
     "http-errors": "~2.0.0",
     "luxon": "^3.4.4",
     "mongodb": "^6.7.0",
