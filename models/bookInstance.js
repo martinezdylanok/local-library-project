@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { DateTime } from "luxon";
 
 const Schema = mongoose.Schema;
 
@@ -22,6 +23,10 @@ BookInstanceSchema.virtual("url").get(function () {
 
 BookInstanceSchema.virtual("due_back_formatted").get(function () {
    return this.due_back.toDateString();
+});
+
+BookInstanceSchema.virtual("due_back_yyyy_mm_dd").get(function () {
+   return DateTime.fromJSDate(this.due_back).toISODate(); // format 'YYYY-MM-DD'
 });
 
 const BookInstance = mongoose.model("BookInstance", BookInstanceSchema);
