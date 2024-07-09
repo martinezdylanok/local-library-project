@@ -4,11 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "node --watch ./bin/www",
-    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+    "start": "NODE_ENV=production node ./bin/www",
+    "devstart": "node --watch ./bin/www"
+  },
+  "engines": {
+    "node": ">=20.13.1"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.6",
     "debug": "~4.3.5",
     "dotenv": "^16.4.5",
@@ -16,7 +19,9 @@
     "express": "~4.19.2",
     "express-async-handler": "^1.2.0",
     "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^7.3.1",
     "express-validator": "^7.1.0",
+    "helmet": "^7.1.0",
     "http-errors": "~2.0.0",
     "luxon": "^3.4.4",
     "mongodb": "^6.7.0",
