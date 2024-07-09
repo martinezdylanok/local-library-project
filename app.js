@@ -10,10 +10,15 @@ import catalogRouter from "./routes/catalog.js";
 import mongoDB from "./config/database.js";
 import mongoose from "mongoose";
 import expressEjsLayouts from "express-ejs-layouts";
+import compression from "compression";
+import helmet from "helmet";
+import RateLimit from "express-rate-limit";
 
+// importing the path module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// creating the express app
 const app = express();
 
 // mongoose connection to the mongoDB
@@ -28,6 +33,22 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.set("layout", "layout");
 
+// Set up rate limiter: maximum of twenty requests per minute
+const limiter = RateLimit({
+   windowMs: 1 * 60 * 1000, // 1 minute
+   max: 20,
+});
+
+// middleware
+app.use(compression());
+app.use(
+   helmet.contentSecurityPolicy({
+      directives: {
+         "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+      },
+   }),
+);
+app.use(limiter);
 app.use(logger("dev"));
 app.use(expressEjsLayouts);
 app.use(express.json());
